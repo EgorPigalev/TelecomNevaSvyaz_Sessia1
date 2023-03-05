@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace TelecomNevaSvyaz
 {
@@ -20,9 +22,130 @@ namespace TelecomNevaSvyaz
     /// </summary>
     public partial class MainWindow : Window
     {
+        string code;
+        int countTime; // Время до окончания действия кода
+        DispatcherTimer disTimer = new DispatcherTimer();
         public MainWindow()
         {
             InitializeComponent();
+            Base.baseDate = new BaseDate();
+            pbPassword.IsEnabled = false;
+            tbCode.IsEnabled = false;
+            btnLogin.IsEnabled = false;
+            disTimer.Interval = new TimeSpan(0, 0, 1);
+            disTimer.Tick += new EventHandler(DisTimer_Tick);
+        }
+
+        private void btnCancellation_Click(object sender, RoutedEventArgs e)
+        {
+            tbNomer.Text = "";
+            pbPassword.Password = "";
+            tbCode.Text = "";
+            disTimer.Stop();
+            code = "";
+            tbRemainingTime.Text = "";
+            pbPassword.IsEnabled = false;
+            tbCode.IsEnabled = false;
+            btnLogin.IsEnabled = false;
+        }
+
+        private void tbNomer_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.nomer == tbNomer.Text);
+                if (employee != null)
+                {
+                    pbPassword.IsEnabled = true;
+                    pbPassword.Focus();
+                }
+                else
+                {
+                    pbPassword.IsEnabled = false;
+                    pbPassword.Password = "";
+                    MessageBox.Show("Произошла ошибка! Сотрудник  с таким номером не найден!");
+                }
+            } 
+        }
+
+        private void pbPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.nomer == tbNomer.Text && x.password == pbPassword.Password);
+                if(employee != null)
+                {
+                    Random rand = new Random();
+                    code = "";
+                    for (int i = 0; i < 8; i++)
+                    {
+                        int j = rand.Next(3); // Выбор 0 - число; 1 - буква; 2 - спецсимвол
+                        if (j == 0)
+                        {
+                            code = code + rand.Next(9).ToString();
+                        }
+                        else if (j == 1)
+                        {
+                            int l = rand.Next(2); // Выбор 0 - заглавная; 1 - маленькая буква
+                            if (l == 0)
+                            {
+                                code = code + (char)rand.Next('A', 'Z' + 1);
+                            }
+                            else
+                            {
+                                code = code + (char)rand.Next('a', 'z' + 1);
+                            }
+                        }
+                        else
+                        {
+                            int l = rand.Next(4); // Выбор диапозона
+                            if (l == 0)
+                            {
+                                code = code + (char)rand.Next(33, 48);
+                            }
+                            else if (l == 1)
+                            {
+                                code = code + (char)rand.Next(58, 65);
+                            }
+                            else if (l == 2)
+                            {
+                                code = code + (char)rand.Next(91, 97);
+                            }
+                            else if (l == 3)
+                            {
+                                code = code + (char)rand.Next(123, 127);
+                            }
+                        }
+                    }
+                    MessageBox.Show("Код для доступа " + code + "\nУ вас будет дано 10 секунд, чтобы ввести код");
+                    tbCode.IsEnabled = true;
+                    btnLogin.IsEnabled = true;
+                    tbCode.Focus();
+                    countTime = 10;
+                    disTimer.Start();
+                }
+                else
+                {
+                    MessageBox.Show("Сотрудник с таким номером и паролем не найден!");
+                    tbCode.IsEnabled = false;
+                    tbCode.Text = "";
+                }
+            }
+        }
+        private void DisTimer_Tick(object sender, EventArgs e)
+        {
+            if (countTime == 0) // Если 10 секунд закончились
+            {
+                disTimer.Stop();
+                code = "";
+                tbRemainingTime.Text = "Код не действителен. Запросите повторную отправку пароля";
+
+            }
+            else
+            {
+                tbRemainingTime.Text = "Код перестанет быть действительным через " + countTime;
+            }
+            countTime--;
         }
     }
 }
