@@ -34,12 +34,12 @@
                 <TextBox x:Name="tbNomer" Margin="10" KeyDown="tbNomer_KeyDown"/>
                 <PasswordBox x:Name="pbPassword" Margin="10" KeyDown="pbPassword_KeyDown"/>
                 <StackPanel Margin="10" MinWidth="200" Orientation="Horizontal">
-                    <TextBox x:Name="tbCode" MinWidth="190" Margin="0, 0, 10, 0"/>
-                    <Image Source="/resources/update.png" Width="30"/>
+                    <TextBox x:Name="tbCode" MinWidth="190" Margin="0, 0, 10, 0" KeyDown="tbCode_KeyDown"/>
+                    <Image Source="/resources/update.png" Width="30" MouseDown="Image_MouseDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
                     <Button x:Name="btnCancellation" Content="Отмена" Margin="10" Width="100" Click="btnCancellation_Click"/>
-                    <Button x:Name="btnLogin" Content="Вход" Margin="10" Width="100"/>
+                    <Button x:Name="btnLogin" Content="Вход" Margin="10" Width="100" Click="btnLogin_Click"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
