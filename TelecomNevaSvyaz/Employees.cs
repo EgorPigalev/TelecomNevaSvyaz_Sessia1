@@ -14,13 +14,13 @@ namespace TelecomNevaSvyaz
     
     public partial class Employees
     {
-        public int id_employee { get; set; }
-        public string surname { get; set; }
-        public string name { get; set; }
-        public string patronymic { get; set; }
-        public int id_role { get; set; }
-        public string nomer { get; set; }
-        public string password { get; set; }
+        public int EmployeesID { get; set; }
+        public string Surname { get; set; }
+        public string Name { get; set; }
+        public string Patronymic { get; set; }
+        public int RoleID { get; set; }
+        public string Nomer { get; set; }
+        public string Password { get; set; }
     
         public virtual Roles Roles { get; set; }
     }
