@@ -38,8 +38,8 @@
                     <Image Source="/resources/update.png" Width="30" MouseDown="Image_MouseDown"/>
                 </StackPanel>
                 <StackPanel Grid.Row="2" Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="10">
-                    <Button x:Name="btnCancellation" Content="Отмена" Margin="10" Width="100" Click="btnCancellation_Click"/>
-                    <Button x:Name="btnLogin" Content="Вход" Margin="10" Width="100" Click="btnLogin_Click"/>
+                    <Button x:Name="btnCancellation" Content="Отмена" Click="btnCancellation_Click" Style="{StaticResource BtnMain}"/>
+                    <Button x:Name="btnLogin" Content="Вход" Margin="10" Width="100" Click="btnLogin_Click" Style="{StaticResource BtnMain}"/>
                 </StackPanel>
             </StackPanel>
         </Grid>
