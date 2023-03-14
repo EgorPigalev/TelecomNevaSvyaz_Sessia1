@@ -52,9 +52,9 @@ namespace TelecomNevaSvyaz
 
         private void tbNomer_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (e.Key == Key.Enter) // Если нажата клавиша Enter
             {
-                Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.Nomer == tbNomer.Text);
+                Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.Nomer == tbNomer.Text); // Сотрудник по номеру
                 if (employee != null)
                 {
                     pbPassword.IsEnabled = true;
@@ -146,11 +146,11 @@ namespace TelecomNevaSvyaz
         /// </summary>
         private void GetNewCode()
         {
-            Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.Nomer == tbNomer.Text && x.Password == pbPassword.Password);
+            Employees employee = Base.baseDate.Employees.FirstOrDefault(x => x.Nomer == tbNomer.Text && x.Password == pbPassword.Password); // Получение сотрудника по номеру и паролю
             if (employee != null)
             {
                 Random rand = new Random();
-                Regex regex = new Regex($"^[0-9a-zA-Z`~!@#$%^&*()_\\-+={{}}\\[\\]\\|:;\"'<>,.?\\/]{{8}}$");
+                Regex regex = new Regex($"^[0-9a-zA-Z`~!@#$%^&*()_\\-+={{}}\\[\\]\\|:;\"'<>,.?\\/]{{8}}$"); // Регулярное выражение для проверки корректности сгенерированого кода
                 while(true)
                 {
                     code = "";

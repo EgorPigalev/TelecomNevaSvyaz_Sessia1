@@ -7,15 +7,16 @@
     <Schema Namespace="Хранилище CRM18Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="Employees">
           <Key>
-            <PropertyRef Name="EmployeesID" />
+            <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="EmployeesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Surname" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="Patronymic" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="RoleID" Type="int" Nullable="false" />
           <Property Name="Nomer" Type="varchar" MaxLength="50" Nullable="false" />
-          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="Image" Type="nvarchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Roles">
           <Key>
@@ -58,15 +59,16 @@
         </EntityContainer>
         <EntityType Name="Employees">
           <Key>
-            <PropertyRef Name="EmployeesID" />
+            <PropertyRef Name="EmployeeID" />
           </Key>
-          <Property Name="EmployeesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployeeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Surname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Patronymic" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="RoleID" Type="Int32" Nullable="false" />
           <Property Name="Nomer" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Image" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Roles" Relationship="CRM18Model.FK_Employees_Roles" FromRole="Employees" ToRole="Roles" />
         </EntityType>
         <EntityType Name="Roles">
@@ -98,13 +100,14 @@
           <EntitySetMapping Name="Employees">
             <EntityTypeMapping TypeName="CRM18Model.Employees">
               <MappingFragment StoreEntitySet="Employees">
+                <ScalarProperty Name="Image" ColumnName="Image" />
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="Nomer" ColumnName="Nomer" />
                 <ScalarProperty Name="RoleID" ColumnName="RoleID" />
                 <ScalarProperty Name="Patronymic" ColumnName="Patronymic" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Surname" ColumnName="Surname" />
-                <ScalarProperty Name="EmployeesID" ColumnName="EmployeesID" />
+                <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
