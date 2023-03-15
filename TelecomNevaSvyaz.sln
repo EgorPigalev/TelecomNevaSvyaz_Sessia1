@@ -5,6 +5,13 @@ VisualStudioVersion = 17.2.32630.192
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TelecomNevaSvyaz", "TelecomNevaSvyaz\TelecomNevaSvyaz.csproj", "{AE9F5751-386A-437D-9309-767CD67EB986}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решения", "Элементы решения", "{509FA505-86A8-4A6A-9559-9E4D75E5F7D8}"
+	ProjectSection(SolutionItems) = preProject
+		Диаграммы\DataDictionary.xlsx = Диаграммы\DataDictionary.xlsx
+		Диаграммы\ER_diagram.pdf = Диаграммы\ER_diagram.pdf
+		Диаграммы\ER_diagram.vsdx = Диаграммы\ER_diagram.vsdx
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
