@@ -194,12 +194,13 @@ namespace TelecomNevaSvyaz
                             }
                         }
                     }
-
-                    if (regex.IsMatch(code));
+                    if (regex.IsMatch(code))
                     {
+                        Clipboard.SetText(code);
                         break;
                     }
                 }
+
                 MessageBox.Show("Код для доступа " + code + "\nУ вас будет дано 10 секунд, чтобы ввести код");
                 tbCode.IsEnabled = true;
                 tbCode.Text = "";
